@@ -3,7 +3,12 @@ guid: 47755c9251f7a5e43b6e0b8aec1e8573
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Patientenzimmer_Ausstattung
+    second: {fileID: 2100000, guid: da85c09c45eec164a9cfab5783dde182, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
