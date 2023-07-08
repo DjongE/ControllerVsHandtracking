@@ -10,6 +10,7 @@ public class HandTrackingTutorialHandler : MonoBehaviour
     public List<GameObject> stepList;
     public GameObject cubeGrabObject;
     public GameObject cubeTouchObject;
+    public GameObject startButton;
 
     [Header("Materials Cube Touched")]
     public Material green;
@@ -17,7 +18,7 @@ public class HandTrackingTutorialHandler : MonoBehaviour
 
     [Header("Channel 2 - Dice Interaction")]
     public GameObject channel2;
-    public DiceHandler diceHandler;
+    private InteractionHandler _interactionHandler;
 
     public HandsTracker handsTracker;
     
@@ -27,6 +28,7 @@ public class HandTrackingTutorialHandler : MonoBehaviour
     private void Start()
     {
         _notificationSound = GetComponent<AudioSource>();
+        _interactionHandler = GetComponent<InteractionHandler>();
     }
 
     private void Update()
@@ -60,28 +62,39 @@ public class HandTrackingTutorialHandler : MonoBehaviour
 
         if (_actuallyStepIndex == 3)
         {
+            cubeGrabObject.SetActive(false);
             cubeTouchObject.transform.parent.gameObject.SetActive(true);
         }
+
+        if (_actuallyStepIndex == 4)
+        {
+            cubeTouchObject.transform.parent.gameObject.SetActive(false);
+            
+            //Open Interaction Menu
+            startButton.SetActive(true);
+        }
+    }
+    
+    private IEnumerator NextStepWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        NextStepChannel1();
     }
 
+    //Step 2 - Release cube
     public void RealeaseCube()
     {
         StartCoroutine(NextStepWithDelay(2f));
     }
 
-    private IEnumerator NextStepWithDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        cubeGrabObject.SetActive(false);
-        NextStepChannel1();
-    }
-
+    //Step 3 - Touch object
     public void ChangeColorToGreen()
     {
         cubeTouchObject.GetComponent<MeshRenderer>().material = green;
-        _notificationSound.Play();
+        StartCoroutine(NextStepWithDelay(2f));
     }
 
+    //The Hand Tracking Tutorial is finished
     public void HandTrackingTutorialDone()
     {
         StartCoroutine(DelayDone());
@@ -89,11 +102,11 @@ public class HandTrackingTutorialHandler : MonoBehaviour
 
     private IEnumerator DelayDone()
     {
-        yield return new WaitForSeconds(3);
-        channel1Object.SetActive(false);
-        cubeTouchObject.transform.parent.gameObject.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        startButton.SetActive(false);
         channel1Object.SetActive(false);
         channel2.SetActive(true);
-        diceHandler.EnableDiceInteraction();
+        _interactionHandler.EnableNextInteraction();
+        _notificationSound.Play();
     }
 }

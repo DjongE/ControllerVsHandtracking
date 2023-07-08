@@ -1,13 +1,14 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Dice : MonoBehaviour
 {
+    [Header("Interaction Handler")]
+    public InteractionHandler interactionHandler;
+    
     private static Rigidbody _rb;
-    public static Vector3 diceVelocity;
+    private int _rollCounter;
 
     private void Start()
     {
@@ -16,13 +17,24 @@ public class Dice : MonoBehaviour
 
     public void OnDice()
     {
-        diceVelocity = _rb.velocity;
-
+        _rollCounter++;
+        
         float dirX = Random.Range(0, 500);
         float dirY = Random.Range(0, 500);
         float dirZ = Random.Range(0, 500);
 
         _rb.AddForce(transform.up * 100);
         _rb.AddTorque(dirX, dirY, dirZ);
+
+        if (_rollCounter >= 5)
+        {
+            StartCoroutine(DiceIsFinished());
+        }
+    }
+
+    private IEnumerator DiceIsFinished()
+    {
+        yield return new WaitForSeconds(2f);
+        interactionHandler.EnableNextInteraction();
     }
 }
