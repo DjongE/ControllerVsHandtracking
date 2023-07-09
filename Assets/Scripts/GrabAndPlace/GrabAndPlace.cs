@@ -24,20 +24,25 @@ public class GrabAndPlace : MonoBehaviour
             if (other.gameObject.Equals(grabPlace1))
             {
                 _object1Placed = true;
-                GetComponent<AudioSource>().Play();
+                interactionHandler.GetComponent<AudioSource>().Play();
+                CheckAllCubesPlaced();
             }
 
             if (other.gameObject.Equals(grabPlace2))
             {
                 _object2Placed = true;
-                GetComponent<AudioSource>().Play();
+                interactionHandler.GetComponent<AudioSource>().Play();
+                CheckAllCubesPlaced();
             }
         }
-        
+    }
+
+    private void CheckAllCubesPlaced()
+    {
         if(_object1Placed && _object2Placed)
         {
             //Interaction done
-            GetComponent<AudioSource>().Play();
+            interactionHandler.GetComponent<AudioSource>().Play();
             StartCoroutine(GrabPlaceFinished());
         }
     }
