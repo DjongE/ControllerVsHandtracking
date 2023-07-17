@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class LightSwitch : MonoBehaviour
 {
+    [Header("Interaction Handler")]
+    public InteractionHandler interactionHandler;
+    
     [Header("Non Haptic Button")]
     public PressableButton nonHapticButtonLightOn;
     public PressableButton nonHapticButtonLightOff;
@@ -23,6 +26,8 @@ public class LightSwitch : MonoBehaviour
     private float _startPushPlane = -0.01747753f;
     private float _endPushPlane = -0.008356876f;
 
+    private int _switchedCounter;
+
     private void Start()
     {
         nonHapticButtonLightOff.StartPushPlane = -0.008356876f;
@@ -34,12 +39,29 @@ public class LightSwitch : MonoBehaviour
             new Vector3(0, 0, -0.008356876f);
     }
 
+    public void LightSwitchDone()
+    {
+        if (_switchedCounter >= 6)
+        {
+            StartCoroutine(DoneDelay());
+        }
+    }
+
+    private IEnumerator DoneDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        interactionHandler.EnableNextInteraction();
+    }
+
     public void ClickLightOnNonHaptic()
     {
         nonHapticButtonLightOff.StartPushPlane = -0.01747753f;
         nonHapticButtonLightOn.StartPushPlane = -0.008356876f;
         
         nonHapticLight.SetActive(true);
+
+        _switchedCounter++;
+        LightSwitchDone();
     }
     
     public void ClickLightOffNonHaptic()
@@ -56,6 +78,9 @@ public class LightSwitch : MonoBehaviour
         hapticButtonLightOn.StartPushPlane = -0.008356876f;
         
         hapticLight.SetActive(true);
+
+        _switchedCounter++;
+        LightSwitchDone();
     }
     
     public void ClickLightOffHaptic()

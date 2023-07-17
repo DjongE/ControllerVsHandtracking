@@ -88,7 +88,7 @@ public class HapticFeedback : MonoBehaviour
         
         if(_inputDevice.TryGetHapticCapabilities(out HapticCapabilities cap) && hapticSended)
         {
-            Debug.Log("Haptic: " + cap.numChannels + " " + cap.supportsImpulse);
+            //Debug.Log("Haptic: " + cap.numChannels + " " + cap.supportsImpulse);
             _inputDevice.SendHapticImpulse(cap.numChannels ,defaultAmplitude, defaultDuration);
             _inputDevice.SendHapticImpulse(0 ,defaultAmplitude, defaultDuration);
             _inputDevice.SendHapticImpulse(1 ,defaultAmplitude, defaultDuration);

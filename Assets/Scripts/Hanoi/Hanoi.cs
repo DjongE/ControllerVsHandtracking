@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class Hanoi : MonoBehaviour
 {
@@ -36,6 +37,17 @@ public class Hanoi : MonoBehaviour
                     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * _hit.distance, Color.yellow);
                     hanoiHandler.HanoiPlacedRight();
                 }
+            }
+        }
+    }
+
+    public void OnCollisionExit(Collision other)
+    {
+        if (underHanoi != null)
+        {
+            if (other.gameObject.name.Equals(underHanoi.name))
+            {
+                hanoiHandler.HanoiRemoved();
             }
         }
     }

@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HandTrackingTutorialHandler : MonoBehaviour
 {
     [Header("Channel 1 - Hand Tracking Tutorial")]
-    public GameObject channel1Object;
+    public GameObject channel2Object;
     public List<GameObject> stepList;
     public GameObject cubeGrabObject;
     public GameObject cubeTouchObject;
@@ -15,12 +16,20 @@ public class HandTrackingTutorialHandler : MonoBehaviour
     [Header("Materials Cube Touched")]
     public Material green;
     private int _actuallyStepIndex;
-
-    [Header("Channel 2 - Dice Interaction")]
-    public GameObject channel2;
+    
+    [Header("Channel 3 - Hand Tracking")]
+    public GameObject channel3HandTracking;
     private InteractionHandler _interactionHandler;
-
+    
+    [Header("Hand Tracker & Data Collector")]
     public HandsTracker handsTracker;
+    public DataCollector dataCollector;
+
+    [Header("Start Hand Tracking Interaction")]
+    public UnityEvent startHandTrackingInteractionEvent;
+
+    [Header("Start Tutorial Event")]
+    public UnityEvent startHandTutorial;
     
     //Audio
     private AudioSource _notificationSound;
@@ -44,7 +53,9 @@ public class HandTrackingTutorialHandler : MonoBehaviour
     
     public void StartHandTrackingTutorial()
     {
-        channel1Object.SetActive(true);
+        channel2Object.SetActive(true);
+        dataCollector.dataName = "HandTracking";
+        startHandTutorial.Invoke();
     }
     
     public void NextStepChannel1()
@@ -71,8 +82,15 @@ public class HandTrackingTutorialHandler : MonoBehaviour
             cubeTouchObject.transform.parent.gameObject.SetActive(false);
             
             //Open Interaction Menu
-            startButton.SetActive(true);
+            //startButton.SetActive(true);
+            StartCoroutine(StartInteractions());
         }
+    }
+
+    private IEnumerator StartInteractions()
+    {
+        yield return new WaitForSeconds(3f);
+        startHandTrackingInteractionEvent.Invoke();
     }
     
     private IEnumerator NextStepWithDelay(float delay)
@@ -104,8 +122,8 @@ public class HandTrackingTutorialHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         startButton.SetActive(false);
-        channel1Object.SetActive(false);
-        channel2.SetActive(true);
+        channel2Object.SetActive(false);
+        channel3HandTracking.SetActive(true);
         _interactionHandler.EnableNextInteraction();
         _notificationSound.Play();
     }

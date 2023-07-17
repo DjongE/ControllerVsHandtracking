@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class VirtualButtons : MonoBehaviour
 {
+    [Header("Interaction Handler")]
+    public InteractionHandler interactionHandler;
+    
     [Header("Car")]
     public Transform car;
     
@@ -24,6 +27,18 @@ public class VirtualButtons : MonoBehaviour
         if(clickedLeft || clickedRight || clickedUp || clickedDown)
             Drive();
     }
+
+    public void VirtualButtonsIsDone()
+    {
+        StartCoroutine(Done());
+    }
+
+    private IEnumerator Done()
+    {
+        yield return new WaitForSeconds(2f);
+        interactionHandler.EnableNextInteraction();
+    }
+
 
     private void Drive()
     {

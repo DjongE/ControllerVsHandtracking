@@ -6,13 +6,21 @@ public class Dice : MonoBehaviour
 {
     [Header("Interaction Handler")]
     public InteractionHandler interactionHandler;
-    
+
+    private InteractionTimer _timer;
+
     private static Rigidbody _rb;
     private int _rollCounter;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _timer = interactionHandler.GetComponent<InteractionTimer>();
+    }
+
+    public void StartDiceInteraction()
+    {
+        _timer.StartTimer();
     }
 
     public void OnDice()
@@ -28,6 +36,7 @@ public class Dice : MonoBehaviour
 
         if (_rollCounter >= 5)
         {
+            _timer.StopTimer();
             StartCoroutine(DiceIsFinished());
         }
     }

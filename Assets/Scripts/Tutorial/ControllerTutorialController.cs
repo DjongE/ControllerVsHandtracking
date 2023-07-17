@@ -49,7 +49,7 @@ public class ControllerTutorialController : MonoBehaviour
 
     private List<HandPresence> handVisualsSkript = new List<HandPresence>();
 
-    private void Awake()
+    private void Start()
     {
         foreach(ArticulatedHandController controller in controllersToExplain)
         {
