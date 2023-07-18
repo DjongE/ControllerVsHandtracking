@@ -24,6 +24,11 @@ public class InteractionTimer : MonoBehaviour
         _timerStopped = true;
     }
 
+    public bool TimerStopped()
+    {
+        return _timerStopped;
+    }
+
     public float GetTimeInSeconds()
     {
         return _time;

@@ -15,8 +15,18 @@ public class GrabAndPlace : MonoBehaviour
     [Header("Interaction Handler")]
     public InteractionHandler interactionHandler;
 
+    public InteractionTimer timer;
+
     private int _objectPlacedCounter;
 
+    public void StartGrabAndPlaceTimer()
+    {
+        if (timer.TimerStopped())
+        {
+            timer.StartTimer();
+        }
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (_objectPlacedCounter < 2)
@@ -42,6 +52,7 @@ public class GrabAndPlace : MonoBehaviour
         if(_object1Placed && _object2Placed)
         {
             //Interaction done
+            timer.StopTimer();
             interactionHandler.GetComponent<AudioSource>().Play();
             StartCoroutine(GrabPlaceFinished());
         }

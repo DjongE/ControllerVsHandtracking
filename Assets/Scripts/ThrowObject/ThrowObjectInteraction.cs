@@ -10,6 +10,16 @@ public class ThrowObjectInteraction : MonoBehaviour
 
     public UnityEvent restartWithHandTrackingEvent;
 
+    public InteractionTimer timer;
+
+    private Coroutine _done;
+
+    public void StartThrowObject()
+    {
+        if(timer.TimerStopped())
+            timer.StartTimer();
+    }
+    
     public void AddPoints(int point)
     {
         hitTarget.Play();
@@ -18,7 +28,10 @@ public class ThrowObjectInteraction : MonoBehaviour
 
     public void ThrowObjectDone()
     {
-        StartCoroutine(DoneDelay());
+        timer.StopTimer();
+        
+        if(_done == null)
+            _done = StartCoroutine(DoneDelay());
     }
 
     private IEnumerator DoneDelay()

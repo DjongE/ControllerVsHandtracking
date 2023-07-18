@@ -8,6 +8,7 @@ public class LightSwitch : MonoBehaviour
 {
     [Header("Interaction Handler")]
     public InteractionHandler interactionHandler;
+    public InteractionTimer timer;
     
     [Header("Non Haptic Button")]
     public PressableButton nonHapticButtonLightOn;
@@ -28,6 +29,8 @@ public class LightSwitch : MonoBehaviour
 
     private int _switchedCounter;
 
+    private Coroutine _done;
+
     private void Start()
     {
         nonHapticButtonLightOff.StartPushPlane = -0.008356876f;
@@ -43,7 +46,9 @@ public class LightSwitch : MonoBehaviour
     {
         if (_switchedCounter >= 6)
         {
-            StartCoroutine(DoneDelay());
+            timer.StopTimer();
+            if(_done == null)
+                _done = StartCoroutine(DoneDelay());
         }
     }
 
@@ -62,6 +67,9 @@ public class LightSwitch : MonoBehaviour
 
         _switchedCounter++;
         LightSwitchDone();
+        
+        if(timer.TimerStopped())
+            timer.StartTimer();
     }
     
     public void ClickLightOffNonHaptic()
@@ -81,6 +89,9 @@ public class LightSwitch : MonoBehaviour
 
         _switchedCounter++;
         LightSwitchDone();
+        
+        if(timer.TimerStopped())
+            timer.StartTimer();
     }
     
     public void ClickLightOffHaptic()

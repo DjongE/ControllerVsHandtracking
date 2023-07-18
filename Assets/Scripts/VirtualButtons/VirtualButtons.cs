@@ -7,6 +7,7 @@ public class VirtualButtons : MonoBehaviour
 {
     [Header("Interaction Handler")]
     public InteractionHandler interactionHandler;
+    public InteractionTimer timer;
     
     [Header("Car")]
     public Transform car;
@@ -22,6 +23,8 @@ public class VirtualButtons : MonoBehaviour
     public bool clickedUp;
     public bool clickedDown;
 
+    private Coroutine _done;
+
     private void LateUpdate()
     {
         if(clickedLeft || clickedRight || clickedUp || clickedDown)
@@ -30,7 +33,9 @@ public class VirtualButtons : MonoBehaviour
 
     public void VirtualButtonsIsDone()
     {
-        StartCoroutine(Done());
+        timer.StopTimer();
+        if(_done == null)
+            _done = StartCoroutine(Done());
     }
 
     private IEnumerator Done()
@@ -44,6 +49,9 @@ public class VirtualButtons : MonoBehaviour
     {
         car.Translate(0f, 0f, move);
         car.Rotate(0f, rotation, 0f);
+        
+        if(timer.TimerStopped())
+            timer.StartTimer();
     }
 
     public void PressLeftButton()

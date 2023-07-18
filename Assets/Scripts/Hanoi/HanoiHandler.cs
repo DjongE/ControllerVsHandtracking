@@ -5,10 +5,21 @@ using UnityEngine;
 public class HanoiHandler : MonoBehaviour
 {
     public InteractionHandler interactionHandler;
+    public InteractionTimer timer;
+
+    private Coroutine _hanoiDone;
     
     public AudioSource doneSound;
 
     private int _placedRight;
+
+    public void StartHanoi()
+    {
+        if (timer.TimerStopped())
+        {
+            timer.StartTimer();
+        }
+    }
     
     public void HanoiPlacedRight()
     {
@@ -17,7 +28,9 @@ public class HanoiHandler : MonoBehaviour
 
         if (_placedRight >= 5)
         {
-            StartCoroutine(HanoiDone());
+            timer.StopTimer();
+            if(_hanoiDone == null)
+                _hanoiDone = StartCoroutine(HanoiDone());
         }
     }
 
