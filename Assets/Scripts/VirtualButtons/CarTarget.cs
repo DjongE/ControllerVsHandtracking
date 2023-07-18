@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class CarTarget : MonoBehaviour
 {
+    public AudioSource arrivedTarget;
     public VirtualButtons virtualButtons;
     public GameObject car;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.Equals(car))
+        if (other.gameObject.Equals(car))
+        {
             virtualButtons.VirtualButtonsIsDone();
+            arrivedTarget.Play();
+        }
     }
 }
