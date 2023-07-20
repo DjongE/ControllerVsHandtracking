@@ -9,7 +9,7 @@ public class ThrowObjectInteraction : MonoBehaviour
 {
     public InteractionHandler interactionHandler;
     public int points;
-    public TextMeshProUGUI pointsText;
+    public TextMeshPro pointsText;
     
     public AudioSource hitTarget;
 

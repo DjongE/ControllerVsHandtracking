@@ -789,7 +789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionHandler: {fileID: 1739932775894402238}
   points: 0
-  pointsText: {fileID: 0}
+  pointsText: {fileID: 445490763}
   hitTarget: {fileID: 1739932775894402232}
   restartWithHandTrackingEvent:
     m_PersistentCalls:
@@ -6627,6 +6627,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6722043194678206255, guid: 74b2bd526ca388b47a195675ef2f06c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722043194919174303, guid: 74b2bd526ca388b47a195675ef2f06c4, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722043194919174303, guid: 74b2bd526ca388b47a195675ef2f06c4, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722043194919174303, guid: 74b2bd526ca388b47a195675ef2f06c4, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722043194919174303, guid: 74b2bd526ca388b47a195675ef2f06c4, type: 3}
+      propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -23687,10 +23703,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1157259344}
-  - {fileID: 2765526843290034089}
   - {fileID: 1245081453}
   - {fileID: 7207244709331491898}
   - {fileID: 314814570}
+  - {fileID: 2765526843290034089}
   - {fileID: 72793948}
   m_Father: {fileID: 0}
   m_RootOrder: 20
@@ -43291,7 +43307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reverse: 1
-  controller: 0
+  controller: 1
   startControllerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -43396,18 +43412,18 @@ MonoBehaviour:
         m_CallState: 2
   interactions:
   - {fileID: 882631011}
-  - {fileID: 2000009813}
   - {fileID: 1739932777302419933}
   - {fileID: 1739932776136971157}
   - {fileID: 1048355047}
+  - {fileID: 2000009813}
   - {fileID: 342649787}
   interactionTimer: {fileID: 1764151470}
   tvInteractionsDisplay:
   - {fileID: 1157259342}
-  - {fileID: 2765526843290034091}
   - {fileID: 1245081452}
   - {fileID: 7207244709331491899}
   - {fileID: 314814568}
+  - {fileID: 2765526843290034091}
   - {fileID: 72793945}
   doneDisplay: {fileID: 1450284337}
   dataCollector: {fileID: 1764151469}
@@ -65295,10 +65311,10 @@ Transform:
   - {fileID: 6789177240863311505}
   - {fileID: 6789177239820183966}
   - {fileID: 882631012}
-  - {fileID: 2000009814}
   - {fileID: 1739932777302419938}
   - {fileID: 1739932776136971162}
   - {fileID: 1048355048}
+  - {fileID: 2000009814}
   - {fileID: 342649788}
   m_Father: {fileID: 6789177240149070186}
   m_RootOrder: 2
