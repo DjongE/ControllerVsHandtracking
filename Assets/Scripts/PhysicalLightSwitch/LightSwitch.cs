@@ -46,7 +46,6 @@ public class LightSwitch : MonoBehaviour
     {
         if (_switchedCounter >= 6)
         {
-            timer.StopTimer();
             if(_done == null)
                 _done = StartCoroutine(DoneDelay());
         }
@@ -54,8 +53,10 @@ public class LightSwitch : MonoBehaviour
 
     private IEnumerator DoneDelay()
     {
+        timer.StopTimer();
+        interactionHandler.AddInteractionData("LightSwitch");
         yield return new WaitForSeconds(2f);
-        interactionHandler.EnableNextInteraction();
+        interactionHandler.NextInteraction();
     }
 
     public void ClickLightOnNonHaptic()
@@ -66,10 +67,11 @@ public class LightSwitch : MonoBehaviour
         nonHapticLight.SetActive(true);
 
         _switchedCounter++;
-        LightSwitchDone();
         
-        if(timer.TimerStopped())
+        if(!timer.TimerStarted())
             timer.StartTimer();
+        
+        LightSwitchDone();
     }
     
     public void ClickLightOffNonHaptic()
@@ -88,10 +90,11 @@ public class LightSwitch : MonoBehaviour
         hapticLight.SetActive(true);
 
         _switchedCounter++;
-        LightSwitchDone();
-        
-        if(timer.TimerStopped())
+
+        if(!timer.TimerStarted())
             timer.StartTimer();
+        
+        LightSwitchDone();
     }
     
     public void ClickLightOffHaptic()

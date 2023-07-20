@@ -21,15 +21,6 @@ public class Taget : MonoBehaviour
             if (other.gameObject.Equals(throwObject))
             {
                 throwObjectInteraction.AddPoints(points);
-                if (!_thrownObjects.Contains(throwObject))
-                {
-                    _thrownObjects.Add(throwObject);
-                }
-
-                if (_thrownObjects.Count == throwObjects.Count)
-                {
-                    throwObjectInteraction.ThrowObjectDone();
-                }
             }
         }
     }

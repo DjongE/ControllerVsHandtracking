@@ -14,6 +14,7 @@ public class HandPresence : MonoBehaviour
     public ArticulatedHandController articulatedHandController;
 
     public UnityEvent OnControllerModelSpawned;
+    public UnityEvent OnHandModelSpawned;
     
     private InputDevice targetDevice;
     private GameObject spawnedController;
@@ -65,6 +66,11 @@ public class HandPresence : MonoBehaviour
                 handAnimator = spawnedHandModel.GetComponent<Animator>();
             }
         }
+    }
+    
+    public GameObject GetHandPrefab()
+    {
+        return spawnedHandModel;
     }
 
     void UpdateHandAnimation()

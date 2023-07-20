@@ -11,14 +11,13 @@ public class HandTrackingTutorialHandler : MonoBehaviour
     public List<GameObject> stepList;
     public GameObject cubeGrabObject;
     public GameObject cubeTouchObject;
-    public GameObject startButton;
 
     [Header("Materials Cube Touched")]
     public Material green;
     private int _actuallyStepIndex;
     
     [Header("Channel 3 - Hand Tracking")]
-    public GameObject channel3HandTracking;
+    public GameObject channel3HandTrackingDisplay;
     private InteractionHandler _interactionHandler;
     
     [Header("Hand Tracker & Data Collector")]
@@ -29,7 +28,7 @@ public class HandTrackingTutorialHandler : MonoBehaviour
     public UnityEvent startHandTrackingInteractionEvent;
 
     [Header("Start Tutorial Event")]
-    public UnityEvent startHandTutorial;
+    public UnityEvent startHandTrackingTutorial;
     
     //Audio
     private AudioSource _notificationSound;
@@ -38,6 +37,13 @@ public class HandTrackingTutorialHandler : MonoBehaviour
     {
         _notificationSound = GetComponent<AudioSource>();
         _interactionHandler = GetComponent<InteractionHandler>();
+
+        if (!_interactionHandler.controller)
+        {
+            channel2Object.SetActive(true);
+            dataCollector.dataName = "HandTracking";
+            startHandTrackingTutorial.Invoke();
+        }
     }
 
     private void Update()
@@ -46,7 +52,7 @@ public class HandTrackingTutorialHandler : MonoBehaviour
         {
             if (handsTracker.leftHandIsTracked && handsTracker.rightHandIsTracked)
             {
-                NextStepChannel1();
+                NextStep();
             }
         }
     }
@@ -55,10 +61,10 @@ public class HandTrackingTutorialHandler : MonoBehaviour
     {
         channel2Object.SetActive(true);
         dataCollector.dataName = "HandTracking";
-        startHandTutorial.Invoke();
+        startHandTrackingTutorial.Invoke();
     }
     
-    public void NextStepChannel1()
+    public void NextStep()
     {
         stepList[_actuallyStepIndex].SetActive(false);
         _actuallyStepIndex++;
@@ -80,10 +86,7 @@ public class HandTrackingTutorialHandler : MonoBehaviour
         if (_actuallyStepIndex == 4)
         {
             cubeTouchObject.transform.parent.gameObject.SetActive(false);
-            
-            //Open Interaction Menu
-            //startButton.SetActive(true);
-            StartCoroutine(StartInteractions());
+            HandTrackingTutorialDone();
         }
     }
 
@@ -96,7 +99,7 @@ public class HandTrackingTutorialHandler : MonoBehaviour
     private IEnumerator NextStepWithDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        NextStepChannel1();
+        NextStep();
     }
 
     //Step 2 - Release cube
@@ -121,10 +124,9 @@ public class HandTrackingTutorialHandler : MonoBehaviour
     private IEnumerator DelayDone()
     {
         yield return new WaitForSeconds(2f);
-        startButton.SetActive(false);
         channel2Object.SetActive(false);
-        channel3HandTracking.SetActive(true);
-        _interactionHandler.EnableNextInteraction();
+        channel3HandTrackingDisplay.SetActive(true);
+        _interactionHandler.NextInteraction();
         _notificationSound.Play();
     }
 }

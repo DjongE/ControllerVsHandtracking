@@ -1,22 +1,34 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ThrowObjectInteraction : MonoBehaviour
 {
+    public InteractionHandler interactionHandler;
     public int points;
+    public TextMeshProUGUI pointsText;
+    
     public AudioSource hitTarget;
 
     public UnityEvent restartWithHandTrackingEvent;
-
     public InteractionTimer timer;
 
     private Coroutine _done;
+    private int _objectThrownCounter;
+    private List<GameObject> _objectsThrown;
+
+    private void Start()
+    {
+        if (_objectsThrown == null)
+            _objectsThrown = new List<GameObject>();
+    }
 
     public void StartThrowObject()
     {
-        if(timer.TimerStopped())
+        if(!timer.TimerStarted())
             timer.StartTimer();
     }
     
@@ -24,20 +36,33 @@ public class ThrowObjectInteraction : MonoBehaviour
     {
         hitTarget.Play();
         points += point;
+        pointsText.text = ("Punkte: " + points);
+    }
+
+    public void ObjectThrown(GameObject thrownObject)
+    {
+        if (!_objectsThrown.Contains(thrownObject))
+        {
+            _objectsThrown.Add(thrownObject);
+        }
+
+        if (_objectsThrown.Count >= 5)
+        {
+            ThrowObjectDone();
+        }
     }
 
     public void ThrowObjectDone()
     {
-        timer.StopTimer();
-        
         if(_done == null)
             _done = StartCoroutine(DoneDelay());
     }
 
     private IEnumerator DoneDelay()
     {
-        yield return new WaitForSeconds(5f);
-        //Neu Starten mit HandTracking
-        restartWithHandTrackingEvent.Invoke();
+        timer.StopTimer();
+        interactionHandler.AddInteractionData("ThrowObject");
+        yield return new WaitForSeconds(2f);
+        interactionHandler.NextInteraction();
     }
 }

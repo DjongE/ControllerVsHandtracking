@@ -18,13 +18,12 @@ public class GrabAndPlace : MonoBehaviour
     public InteractionTimer timer;
 
     private int _objectPlacedCounter;
+    private Coroutine _done;
 
     public void StartGrabAndPlaceTimer()
     {
-        if (timer.TimerStopped())
-        {
+        if (!timer.TimerStarted())
             timer.StartTimer();
-        }
     }
     
     private void OnTriggerEnter(Collider other)
@@ -52,15 +51,17 @@ public class GrabAndPlace : MonoBehaviour
         if(_object1Placed && _object2Placed)
         {
             //Interaction done
-            timer.StopTimer();
             interactionHandler.GetComponent<AudioSource>().Play();
-            StartCoroutine(GrabPlaceFinished());
+            if(_done == null)
+                _done = StartCoroutine(GrabPlaceFinished());
         }
     }
 
     private IEnumerator GrabPlaceFinished()
     {
+        timer.StopTimer();
+        interactionHandler.AddInteractionData("GrabAndPlace");
         yield return new WaitForSeconds(2f);
-        interactionHandler.EnableNextInteraction();
+        interactionHandler.NextInteraction();
     }
 }

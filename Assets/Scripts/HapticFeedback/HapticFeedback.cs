@@ -26,11 +26,11 @@ public class HapticFeedback : MonoBehaviour
         List<InputDevice> devices = new List<InputDevice>();
         InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
 
-        Debug.Log("Device: " + devices.Count);
+        //Debug.Log("Device: " + devices.Count);
         
         foreach (var item in devices)
         {
-            Debug.Log("Haptic: " + item.name + item.characteristics);
+            //Debug.Log("Haptic: " + item.name + item.characteristics);
         }
         
         if (devices.Count > 0)

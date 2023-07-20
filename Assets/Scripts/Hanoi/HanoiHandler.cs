@@ -15,10 +15,8 @@ public class HanoiHandler : MonoBehaviour
 
     public void StartHanoi()
     {
-        if (timer.TimerStopped())
-        {
+        if (!timer.TimerStarted())
             timer.StartTimer();
-        }
     }
     
     public void HanoiPlacedRight()
@@ -26,9 +24,8 @@ public class HanoiHandler : MonoBehaviour
         doneSound.Play();
         _placedRight++;
 
-        if (_placedRight >= 5)
+        if (_placedRight >= 3)
         {
-            timer.StopTimer();
             if(_hanoiDone == null)
                 _hanoiDone = StartCoroutine(HanoiDone());
         }
@@ -41,7 +38,9 @@ public class HanoiHandler : MonoBehaviour
 
     private IEnumerator HanoiDone()
     {
+        timer.StopTimer();
+        interactionHandler.AddInteractionData("Hanoi");
         yield return new WaitForSeconds(2f);
-        interactionHandler.EnableNextInteraction();
+        interactionHandler.NextInteraction();
     }
 }

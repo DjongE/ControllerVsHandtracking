@@ -33,15 +33,16 @@ public class VirtualButtons : MonoBehaviour
 
     public void VirtualButtonsIsDone()
     {
-        timer.StopTimer();
         if(_done == null)
             _done = StartCoroutine(Done());
     }
 
     private IEnumerator Done()
     {
+        timer.StopTimer();
+        interactionHandler.AddInteractionData("VirtualButtons");
         yield return new WaitForSeconds(2f);
-        interactionHandler.EnableNextInteraction();
+        interactionHandler.NextInteraction();
     }
 
 
@@ -50,7 +51,7 @@ public class VirtualButtons : MonoBehaviour
         car.Translate(0f, 0f, move);
         car.Rotate(0f, rotation, 0f);
         
-        if(timer.TimerStopped())
+        if(!timer.TimerStarted())
             timer.StartTimer();
     }
 

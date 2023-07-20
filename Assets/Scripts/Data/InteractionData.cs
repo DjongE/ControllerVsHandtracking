@@ -1,13 +1,14 @@
 using UnityEngine;
 
+[System.Serializable]
 public class InteractionData
 {
-    private string _inputName;
-    private string _interactionName;
-    private float _seconds;
-    private int _countGrabInteraction;
-    private int _countReleaseInteraction;
-    private int _countTouchInteraction;
+    public string _inputName;
+    public string _interactionName;
+    public float _seconds;
+    public int _countGrabInteraction;
+    public int _countReleaseInteraction;
+    public int _countTouchInteraction;
 
     public InteractionData() { }
 

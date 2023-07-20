@@ -1,13 +1,14 @@
+using System;
 using UnityEngine;
 
 public class InteractionTimer : MonoBehaviour
 {
-    private bool _timerStopped;
+    private bool _timerStarted;
     private float _time;
-    
+
     private void Update()
     {
-        if (!_timerStopped)
+        if (_timerStarted)
         {
             _time += Time.deltaTime;
         }
@@ -16,17 +17,19 @@ public class InteractionTimer : MonoBehaviour
     public void StartTimer()
     {
         _time = 0;
-        _timerStopped = false;
+        _timerStarted = true;
+        Debug.Log("Timer gestartet: " + _time);
     }
 
     public void StopTimer()
     {
-        _timerStopped = true;
+        _timerStarted = false;
+        Debug.Log("Timer gestopt: " + _time);
     }
 
-    public bool TimerStopped()
+    public bool TimerStarted()
     {
-        return _timerStopped;
+        return _timerStarted;
     }
 
     public float GetTimeInSeconds()
