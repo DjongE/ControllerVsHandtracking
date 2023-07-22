@@ -12,6 +12,7 @@ public class HanoiHandler : MonoBehaviour
     public AudioSource doneSound;
 
     private int _placedRight;
+    private bool _allHanoiPlaced;
 
     public void StartHanoi()
     {
@@ -23,17 +24,28 @@ public class HanoiHandler : MonoBehaviour
     {
         doneSound.Play();
         _placedRight++;
+        Debug.Log("Hanoi Counter Placed: " + _placedRight);
 
-        if (_placedRight >= 3)
+        if (_placedRight > 0 && !_allHanoiPlaced)
         {
-            if(_hanoiDone == null)
-                _hanoiDone = StartCoroutine(HanoiDone());
+            _allHanoiPlaced = true;
+            _hanoiDone = StartCoroutine(HanoiDone());
         }
     }
 
     public void HanoiRemoved()
     {
-        _placedRight--;
+        if (_placedRight > 0)
+        {
+            _placedRight--;
+        }
+        
+        _allHanoiPlaced = false;
+        
+        if(_hanoiDone != null)
+            StopCoroutine(_hanoiDone);
+        
+        Debug.Log("Hanoi Counter Removed: " + _placedRight);
     }
 
     private IEnumerator HanoiDone()

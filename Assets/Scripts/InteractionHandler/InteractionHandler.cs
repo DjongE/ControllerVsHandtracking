@@ -29,6 +29,10 @@ public class InteractionHandler : MonoBehaviour
     [Header("Data Collector")]
     public DataCollector dataCollector;
 
+    [Header("Hand Presence")]
+    public HandPresence leftHandPresence;
+    public HandPresence rightHandPresence;
+
     private int _actuallyInteraction;
     private AudioSource _doneSound;
 
@@ -47,11 +51,15 @@ public class InteractionHandler : MonoBehaviour
         {
             _inputName = "Controller";
             startControllerEvent.Invoke();
+            leftHandPresence.showController = true;
+            rightHandPresence.showController = true;
         }
         else
         {
             _inputName = "HandTracking";
             startHandTrackingEvent.Invoke();
+            leftHandPresence.showController = false;
+            rightHandPresence.showController = false;
         }
     }
 

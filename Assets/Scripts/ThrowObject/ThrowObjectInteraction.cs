@@ -45,6 +45,7 @@ public class ThrowObjectInteraction : MonoBehaviour
         {
             _objectsThrown.Add(thrownObject);
         }
+        Debug.Log("Thrown: " + _objectsThrown.Count);
 
         if (_objectsThrown.Count >= 5)
         {

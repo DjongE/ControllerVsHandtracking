@@ -15,6 +15,8 @@ public class HandPresence : MonoBehaviour
 
     public UnityEvent OnControllerModelSpawned;
     public UnityEvent OnHandModelSpawned;
+
+    public InteractionHandler interactionHandler;
     
     private InputDevice targetDevice;
     private GameObject spawnedController;
@@ -27,7 +29,8 @@ public class HandPresence : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TryInitialize();
+        if(interactionHandler.controller)
+            TryInitialize();
     }
 
     void TryInitialize()
@@ -134,10 +137,11 @@ public class HandPresence : MonoBehaviour
             return;
         }
 
-        if (!targetDevice.isValid)
+        if (!targetDevice.isValid && interactionHandler.controller)
         {
             TryInitialize();
         }
+        
         else
         {
             if (showController)
@@ -156,8 +160,5 @@ public class HandPresence : MonoBehaviour
                 UpdateHandAnimation();
             }
         }
-
-
-
     }
 }

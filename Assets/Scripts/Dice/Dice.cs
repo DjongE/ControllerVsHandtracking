@@ -31,7 +31,7 @@ public class Dice : MonoBehaviour
         Debug.Log("Roll Counter: " + _rollCounter);
         _rb.AddTorque(Random.Range(0,500),Random.Range(0,500),Random.Range(0,500));
 
-        if (_rollCounter >= 6)
+        if (_rollCounter > 4)
         {
             Debug.Log("Roll Counter Done");
             if(_diceFinished == null)
