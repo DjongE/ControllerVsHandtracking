@@ -36,4 +36,9 @@ public class InteractionTimer : MonoBehaviour
     {
         return _time;
     }
+
+    public void SetTimeInSeconds(float newTime)
+    {
+        _time = newTime;
+    }
 }

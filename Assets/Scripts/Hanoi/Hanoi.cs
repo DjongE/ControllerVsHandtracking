@@ -5,12 +5,13 @@ using UnityEngine.PlayerLoop;
 public class Hanoi : MonoBehaviour
 {
     public HanoiHandler hanoiHandler;
+    public AudioSource placedRight;
     public GameObject underHanoi;
     public GameObject aboveHanoi;
 
     private RaycastHit _hit;
     private float _damp = 0.01f;
-    private bool _isPlacedRight;
+    public bool isPlacedRight;
     private bool _underObjectisRight1;
     private bool _underObjectisRight2;
     private bool _aboveObjectIsRight1;
@@ -21,20 +22,23 @@ public class Hanoi : MonoBehaviour
         UnderHanoiPlacedRight();
         AboveHanoiPlacedRight();
 
-        if ((_underObjectisRight1 || _underObjectisRight2 ) && (_aboveObjectIsRight1 || _aboveObjectIsRight2) && !_isPlacedRight)
+        if ((_underObjectisRight1 || _underObjectisRight2 ) && (_aboveObjectIsRight1 || _aboveObjectIsRight2) && !isPlacedRight)
         {
             Debug.Log("Hanoi: Ja " + transform.name);
-            hanoiHandler.HanoiPlacedRight();
-            _isPlacedRight = true;
+            isPlacedRight = true;
+            placedRight.Play();
+            //hanoiHandler.HanoiPlacedRight();
         }
 
         if ((!_underObjectisRight1 && !_underObjectisRight2) || (!_aboveObjectIsRight1 && !_aboveObjectIsRight2) &&
-            _isPlacedRight)
+            isPlacedRight)
         {
             Debug.Log("Hanoi: Nein " + transform.name);
-            hanoiHandler.HanoiRemoved();
-            _isPlacedRight = false;
+            isPlacedRight = false;
+            //hanoiHandler.HanoiRemoved();
         }
+        
+        Debug.Log("Hanoi: KORREKT " + transform.name + " : " + isPlacedRight);
     }
 
     private void UnderHanoiPlacedRight()

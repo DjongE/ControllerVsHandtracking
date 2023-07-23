@@ -16,8 +16,6 @@ public class GrabAndPlace : MonoBehaviour
     public InteractionHandler interactionHandler;
 
     public InteractionTimer timer;
-
-    private int _objectPlacedCounter;
     private Coroutine _done;
 
     public void StartGrabAndPlaceTimer()
@@ -28,40 +26,61 @@ public class GrabAndPlace : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (_objectPlacedCounter < 2)
+        if (other.gameObject.Equals(grabPlace1))
         {
-            if (other.gameObject.Equals(grabPlace1))
-            {
-                _object1Placed = true;
-                interactionHandler.GetComponent<AudioSource>().Play();
-                CheckAllCubesPlaced();
-            }
+            _object1Placed = true;
+            interactionHandler.GetComponent<AudioSource>().Play();
+            CheckAllCubesPlaced();
+        }
 
-            if (other.gameObject.Equals(grabPlace2))
-            {
-                _object2Placed = true;
-                interactionHandler.GetComponent<AudioSource>().Play();
-                CheckAllCubesPlaced();
-            }
+        if (other.gameObject.Equals(grabPlace2))
+        {
+            _object2Placed = true;
+            interactionHandler.GetComponent<AudioSource>().Play();
+            CheckAllCubesPlaced();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.Equals(grabPlace1))
+        {
+            _object1Placed = false;
+            CheckAllCubesPlaced();
+        }
+
+        if (other.gameObject.Equals(grabPlace2))
+        {
+            _object2Placed = false;
+            CheckAllCubesPlaced();
         }
     }
 
     private void CheckAllCubesPlaced()
     {
+        Debug.Log("GrabAndPlace: " + _object1Placed + " : " + _object2Placed);
         if(_object1Placed && _object2Placed)
         {
+            Debug.Log("GrabAndPlace2: " + "Start Coroutine");
             //Interaction done
             interactionHandler.GetComponent<AudioSource>().Play();
-            if(_done == null)
-                _done = StartCoroutine(GrabPlaceFinished());
+            _done = StartCoroutine(GrabPlaceFinished());
+        }
+        Debug.Log("GrabAndPlace2: " + _object1Placed + " : " + _object2Placed);
+        if (!_object1Placed || !_object2Placed)
+        {
+            Debug.Log("GrabAndPlace2: " + "Stop Coroutine");
+            if (_done != null)
+                StopCoroutine(_done);
         }
     }
 
     private IEnumerator GrabPlaceFinished()
     {
-        timer.StopTimer();
-        interactionHandler.AddInteractionData("GrabAndPlace");
         yield return new WaitForSeconds(2f);
+        timer.StopTimer();
+        timer.SetTimeInSeconds(timer.GetTimeInSeconds() - 2f);
+        interactionHandler.AddInteractionData("GrabAndPlace");
         interactionHandler.NextInteraction();
     }
 }
