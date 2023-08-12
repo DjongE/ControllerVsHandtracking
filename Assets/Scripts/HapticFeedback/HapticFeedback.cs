@@ -1,19 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Microsoft.MixedReality.Toolkit.Input;
 using UnityEngine.XR;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class HapticFeedback : MonoBehaviour
 {
+    [Header("Default Amplitude and Duration")]
     public float defaultAmplitude = 0.2f;
     public float defaultDuration = 0.1f;
     
-    public List<GameObject> controllerPrefabs;
-    
-    public InputDeviceCharacteristics controllerCharacteristics;
+    [Header("Setting for the controller characteristics")]
+    public InputDeviceCharacteristics controllerCharacteristics;//E.g. Controller, Left
     private InputDevice _inputDevice;
 
+    [Header("Information - Haptic Feedback sended")]
     public bool hapticSended;
 
     private void Start()
@@ -24,15 +23,8 @@ public class HapticFeedback : MonoBehaviour
     private void TryInitialize()
     {
         List<InputDevice> devices = new List<InputDevice>();
-        InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
+        InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);//Try to get the correct controller with the characteristics
 
-        //Debug.Log("Device: " + devices.Count);
-        
-        foreach (var item in devices)
-        {
-            //Debug.Log("Haptic: " + item.name + item.characteristics);
-        }
-        
         if (devices.Count > 0)
         {
             _inputDevice = devices[0];
@@ -65,19 +57,9 @@ public class HapticFeedback : MonoBehaviour
     {
         if(_inputDevice.TryGetHapticCapabilities(out HapticCapabilities cap) && hapticSended)
         {
-            //_inputDevice.SendHapticImpulse(cap.numChannels ,defaultAmplitude, defaultDuration);
-            _inputDevice.SendHapticImpulse(0 ,defaultAmplitude, defaultDuration);
-            //_inputDevice.SendHapticImpulse(1 ,defaultAmplitude, defaultDuration);
-            //_inputDevice.SendHapticImpulse(2 ,defaultAmplitude, defaultDuration);
-            //_inputDevice.SendHapticImpulse(3 ,defaultAmplitude, defaultDuration);
-            //_inputDevice.SendHapticBuffer(cap.numChannels, new byte[1000]);
+            _inputDevice.SendHapticImpulse(0 ,defaultAmplitude, defaultDuration);//Trigger the Haptic Feedback
         }
         
         TryInitialize();
-
-        if (!_inputDevice.isValid)
-        {
-            //TryInitialize();
-        }
     }
 }

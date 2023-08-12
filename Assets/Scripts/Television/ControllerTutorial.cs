@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.MixedReality.OpenXR;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -32,7 +30,7 @@ public class ControllerTutorial : MonoBehaviour
     [Header("Start Controller Tutorial Event")]
     public UnityEvent startControllerTutorialEvent;
     
-    //Audio
+    //Notification sound
     private AudioSource _notificationSound;
 
     private void Start()
@@ -59,19 +57,19 @@ public class ControllerTutorial : MonoBehaviour
 
     public void NextStep()
     {
-        stepList[_actuallyStepIndex].SetActive(false);
+        stepList[_actuallyStepIndex].SetActive(false);//Disable the previous television tutorial
         _actuallyStepIndex++;
-        stepList[_actuallyStepIndex].SetActive(true);
+        stepList[_actuallyStepIndex].SetActive(true);//Enable the next television tutorial
         
         _notificationSound.Play();
         
         if(_actuallyStepIndex == 1)
-            cubeGrabObject.SetActive(true);
+            cubeGrabObject.SetActive(true);//Enable grab object tutorial
 
         if (_actuallyStepIndex == 3)
         {
-            cubeGrabObject.SetActive(false);
-            cubeTouchObject.transform.parent.gameObject.SetActive(true);
+            cubeGrabObject.SetActive(false);//Disable grab object tutorial
+            cubeTouchObject.transform.parent.gameObject.SetActive(true);//Enable touch object tutorial
         }
 
         if (_actuallyStepIndex == 4)
@@ -87,17 +85,20 @@ public class ControllerTutorial : MonoBehaviour
         NextStep();
     }
 
-    public void ReleaseCube()
+    //Step 2 - Release cube
+    public void ReleaseCube()//Grab tutorial
     {
         StartCoroutine(NextStepWithDelay(2f));
     }
 
-    public void ChangeColorToGreen()
+    //Step 3 - Touch object
+    public void ChangeColorToGreen()//Touch tutorial
     {
         cubeTouchObject.GetComponent<MeshRenderer>().material = green;
         StartCoroutine(NextStepWithDelay(2f));
     }
 
+    //The Controller Tutorial is finished
     public void ControllerTutorialDone()
     {
         StartCoroutine(DelayDone());

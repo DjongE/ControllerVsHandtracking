@@ -1,21 +1,23 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ThrowObjectInteraction : MonoBehaviour
 {
+    [Header("Interaction Handler")]
     public InteractionHandler interactionHandler;
+    
+    [Header("Interaction Timer")]
+    public InteractionTimer timer;
+    
+    [Header("Points")]
     public int points;
     public TextMeshPro pointsText;
     
+    [Header("Hit the target sound")]
     public AudioSource hitTarget;
-
-    public UnityEvent restartWithHandTrackingEvent;
-    public InteractionTimer timer;
-
+    
     private Coroutine _done;
     private int _objectThrownCounter;
     private List<GameObject> _objectsThrown;
@@ -45,7 +47,6 @@ public class ThrowObjectInteraction : MonoBehaviour
         {
             _objectsThrown.Add(thrownObject);
         }
-        Debug.Log("Thrown: " + _objectsThrown.Count);
 
         if (_objectsThrown.Count >= 5)
         {

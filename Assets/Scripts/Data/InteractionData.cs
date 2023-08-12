@@ -3,90 +3,90 @@ using UnityEngine;
 [System.Serializable]
 public class InteractionData
 {
-    public string _inputName;
-    public string _interactionName;
-    public float _seconds;
-    public int _countGrabInteraction;
-    public int _countReleaseInteraction;
-    public int _countTouchInteraction;
+    public string inputName;
+    public string interactionName;
+    public float seconds;
+    public int countGrabInteraction;
+    public int countReleaseInteraction;
+    public int countTouchInteraction;
 
     public InteractionData() { }
 
     public InteractionData(string name)
     {
-        _interactionName = name;
+        interactionName = name;
     }
     
     public InteractionData(string inputName, string name, float seconds, int countGrabInteraction, int countReleaseInteraction, int countTouchInteraction)
     {
-        _interactionName = name;
-        _seconds = seconds;
-        _countGrabInteraction = countGrabInteraction;
-        _inputName = inputName;
+        interactionName = name;
+        this.seconds = seconds;
+        this.countGrabInteraction = countGrabInteraction;
+        this.inputName = inputName;
     }
     
     public void SetInputName(string name)
     {
-        _inputName = name;
+        inputName = name;
     }
 
     public string GetInputName()
     {
-        return _inputName;
+        return inputName;
     }
 
     public void SetName(string name)
     {
-        _interactionName = name;
+        interactionName = name;
     }
 
     public string GetName()
     {
-        return _interactionName;
+        return interactionName;
     }
 
     public void SetSeconds(float seconds)
     {
-        _seconds = seconds;
+        this.seconds = seconds;
     }
 
     public float GetSeconds()
     {
-        return _seconds;
+        return seconds;
     }
 
     public void SetCountGrabInteraction(int countGrabInteraction)
     {
-        _countGrabInteraction = countGrabInteraction;
+        this.countGrabInteraction = countGrabInteraction;
     }
 
     public int GetCountGrabInteraction()
     {
-        return _countGrabInteraction;
+        return countGrabInteraction;
     }
 
     public void SetCountReleaseInteraction(int countReleaseInteraction)
     {
-        _countReleaseInteraction = countReleaseInteraction;
+        this.countReleaseInteraction = countReleaseInteraction;
     }
 
     public int GetCountReleaseInteraction()
     {
-        return _countReleaseInteraction;
+        return countReleaseInteraction;
     }
     
     public void SetCountTouchInteraction(int countTouchInteraction)
     {
-        _countTouchInteraction = countTouchInteraction;
+        this.countTouchInteraction = countTouchInteraction;
     }
 
     public int GetCountTouchInteraction()
     {
-        return _countTouchInteraction;
+        return countTouchInteraction;
     }
 
     public void PrintInteractionData()
     {
-        Debug.Log("Name: " + _interactionName + " Seconds: " + _seconds + " Count Grab Interaction: " + _countGrabInteraction);
+        Debug.Log("Name: " + interactionName + " Seconds: " + seconds + " Count Grab Interaction: " + countGrabInteraction);
     }
 }

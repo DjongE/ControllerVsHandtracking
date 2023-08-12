@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/**
+ * Handles the complete order of the interactions
+ */
 public class InteractionHandler : MonoBehaviour
 {
     [Header("Reverse Interaction")]
@@ -45,8 +48,6 @@ public class InteractionHandler : MonoBehaviour
         else
             _actuallyInteraction = 0;
         
-        print("Reverse: " + _actuallyInteraction);
-
         if (controller)
         {
             _inputName = "Controller";
@@ -68,11 +69,9 @@ public class InteractionHandler : MonoBehaviour
         if (reverse)
         {
             EnableReverseInteraction();
-            Debug.Log("Next");
         }
         else
         {
-            Debug.Log("Next2: " + _actuallyInteraction);
             EnableNextInteraction();
         }
     }
@@ -88,16 +87,16 @@ public class InteractionHandler : MonoBehaviour
             doneDisplay.SetActive(true);
         }
         
-        //Disable previous interaction
         if (_actuallyInteraction > 0)
         {
+            //Disable previous interaction
             interactions[_actuallyInteraction - 1].SetActive(false);
             tvInteractionsDisplay[_actuallyInteraction - 1].SetActive(false);
         }
 
         if (_actuallyInteraction < 6)
         {
-            //Enable Interaction
+            //Enable next interaction
             interactions[_actuallyInteraction].SetActive(true);
             tvInteractionsDisplay[_actuallyInteraction].SetActive(true);
         }
@@ -116,16 +115,16 @@ public class InteractionHandler : MonoBehaviour
             doneDisplay.SetActive(true);
         }
         
-        //Disable previous interaction
         if (_actuallyInteraction < 5)
         {
+            //Disable previous interaction
             interactions[_actuallyInteraction + 1].SetActive(false);
             tvInteractionsDisplay[_actuallyInteraction + 1].SetActive(false);
         }
 
         if (_actuallyInteraction >= 0)
         {
-            //Enable Interaction
+            //Enable next interaction
             interactions[_actuallyInteraction].SetActive(true);
             tvInteractionsDisplay[_actuallyInteraction].SetActive(true);
         }
@@ -135,6 +134,7 @@ public class InteractionHandler : MonoBehaviour
 
     public void AddInteractionData(string name)
     {
+        //Add a new InteractionData object to the dataCollector
         InteractionData id = new InteractionData(name);
         id.SetInputName(dataCollector.dataName);
         id.SetSeconds(interactionTimer.GetTimeInSeconds());

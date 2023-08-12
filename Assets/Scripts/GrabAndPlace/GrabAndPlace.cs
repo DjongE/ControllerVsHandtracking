@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GrabAndPlace : MonoBehaviour
@@ -15,6 +13,7 @@ public class GrabAndPlace : MonoBehaviour
     [Header("Interaction Handler")]
     public InteractionHandler interactionHandler;
 
+    [Header("Interaction Timer")]
     public InteractionTimer timer;
     private Coroutine _done;
 
@@ -24,6 +23,7 @@ public class GrabAndPlace : MonoBehaviour
             timer.StartTimer();
     }
     
+    //Checks if the dice have been placed in the orange basket
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.Equals(grabPlace1))
@@ -56,25 +56,24 @@ public class GrabAndPlace : MonoBehaviour
         }
     }
 
+    //Start ord stop a Coroutine when both cubes are placed in the basket
     private void CheckAllCubesPlaced()
     {
-        Debug.Log("GrabAndPlace: " + _object1Placed + " : " + _object2Placed);
         if(_object1Placed && _object2Placed)
         {
-            Debug.Log("GrabAndPlace2: " + "Start Coroutine");
             //Interaction done
             interactionHandler.GetComponent<AudioSource>().Play();
             _done = StartCoroutine(GrabPlaceFinished());
         }
-        Debug.Log("GrabAndPlace2: " + _object1Placed + " : " + _object2Placed);
+        
         if (!_object1Placed || !_object2Placed)
         {
-            Debug.Log("GrabAndPlace2: " + "Stop Coroutine");
             if (_done != null)
                 StopCoroutine(_done);
         }
     }
 
+    //Executed when both cubes are placed in the basket
     private IEnumerator GrabPlaceFinished()
     {
         yield return new WaitForSeconds(2f);

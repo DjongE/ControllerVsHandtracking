@@ -1,17 +1,18 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VirtualButtons : MonoBehaviour
 {
     [Header("Interaction Handler")]
     public InteractionHandler interactionHandler;
+    
+    [Header("Interaction Timer")]
     public InteractionTimer timer;
     
     [Header("Car")]
     public Transform car;
     
+    [Header("Movement datas")]
     public float move;
     public float moveSpeed;
     public float rotation;
@@ -44,9 +45,8 @@ public class VirtualButtons : MonoBehaviour
         yield return new WaitForSeconds(2f);
         interactionHandler.NextInteraction();
     }
-
-
-    private void Drive()
+    
+    private void Drive()//Lets drive the car
     {
         car.Translate(0f, 0f, move);
         car.Rotate(0f, rotation, 0f);

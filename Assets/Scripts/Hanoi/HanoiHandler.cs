@@ -1,27 +1,30 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HanoiHandler : MonoBehaviour
 {
+    [Header("Hanoi Objects")]
     public List<Hanoi> hanoiObjects;
-    public List<Hanoi> _placedRightHanoiObjects;
+    
+    [Header("Placed Correctly Objects")]
+    public List<Hanoi> placedRightHanoiObjects;
     private int _hanoiObejectDoneCounter;
 
+    [Header("Interaction Handler")]
     public InteractionHandler interactionHandler;
+    
+    [Header("Interaction Timer")]
     public InteractionTimer timer;
 
     private Coroutine _hanoiDone;
-    
-    public AudioSource doneSound;
 
     private int _placedRight;
     private bool _allHanoiPlaced;
 
     public void StartHanoi()
     {
-        _placedRightHanoiObjects = new List<Hanoi>();
+        placedRightHanoiObjects = new List<Hanoi>();
         
         if (!timer.TimerStarted())
             timer.StartTimer();
@@ -32,37 +35,35 @@ public class HanoiHandler : MonoBehaviour
         HanoiPlacedRight();
     }
 
+    //Check if the objects are placed correctly
     public void HanoiPlacedRight()
     {
-        //doneSound.Play();
-        Debug.Log("Hanoi Counter Placed: " + _placedRight);
-
         foreach (Hanoi hanoi in hanoiObjects)
         {
             Debug.Log("CheckPlaced: " + hanoi.isPlacedRight + " : " + hanoi.gameObject.name);
             if (hanoi.isPlacedRight)
             {
-                if(!_placedRightHanoiObjects.Contains(hanoi))
-                    _placedRightHanoiObjects.Add(hanoi);
+                if(!placedRightHanoiObjects.Contains(hanoi))
+                    placedRightHanoiObjects.Add(hanoi);
                 
-                Debug.Log("Korrekt platziert: " + _placedRightHanoiObjects.Count);
+                Debug.Log("Korrekt platziert: " + placedRightHanoiObjects.Count);
             }
             else
             {
-                if (_placedRightHanoiObjects.Contains(hanoi))
-                    _placedRightHanoiObjects.Remove(hanoi);
+                if (placedRightHanoiObjects.Contains(hanoi))
+                    placedRightHanoiObjects.Remove(hanoi);
                 
-                Debug.Log("Falsch platziert: " + _placedRightHanoiObjects.Count);
+                Debug.Log("Falsch platziert: " + placedRightHanoiObjects.Count);
             }
         }
         
-        if (_placedRightHanoiObjects.Count >= 4 && !_allHanoiPlaced)
+        if (placedRightHanoiObjects.Count >= 4 && !_allHanoiPlaced)
         {
             _allHanoiPlaced = true;
             _hanoiDone = StartCoroutine(HanoiDone());
         }
         
-        if(_placedRightHanoiObjects.Count < 4 && _allHanoiPlaced)
+        if(placedRightHanoiObjects.Count < 4 && _allHanoiPlaced)
         {
             _allHanoiPlaced = false;
             if(_hanoiDone != null)
@@ -79,29 +80,26 @@ public class HanoiHandler : MonoBehaviour
             Debug.Log("CheckPlaced: " + hanoi.isPlacedRight + " : " + hanoi.gameObject.name);
             if (hanoi.isPlacedRight)
             {
-                if(!_placedRightHanoiObjects.Contains(hanoi))
-                    _placedRightHanoiObjects.Add(hanoi);
+                if(!placedRightHanoiObjects.Contains(hanoi))
+                    placedRightHanoiObjects.Add(hanoi);
                 
-                Debug.Log("Korrekt platziert: " + _placedRightHanoiObjects.Count);
+                Debug.Log("Korrekt platziert: " + placedRightHanoiObjects.Count);
             }
             else
             {
-                if (_placedRightHanoiObjects.Contains(hanoi))
-                    _placedRightHanoiObjects.Remove(hanoi);
+                if (placedRightHanoiObjects.Contains(hanoi))
+                    placedRightHanoiObjects.Remove(hanoi);
                 
-                Debug.Log("Falsch platziert: " + _placedRightHanoiObjects.Count);
+                Debug.Log("Falsch platziert: " + placedRightHanoiObjects.Count);
             }
         }
         
         if(_hanoiDone != null)
             StopCoroutine(_hanoiDone);
-        
-        Debug.Log("Hanoi Counter Removed: " + _placedRight);
     }
 
     private IEnumerator HanoiDone()
     {
-        Debug.Log("STOP ICH BIMS JENS UND STEFAN");
         yield return new WaitForSeconds(2f);
         timer.StopTimer();
         timer.SetTimeInSeconds(timer.GetTimeInSeconds() - 2f);

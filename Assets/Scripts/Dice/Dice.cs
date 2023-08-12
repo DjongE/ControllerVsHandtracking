@@ -7,6 +7,7 @@ public class Dice : MonoBehaviour
     [Header("Interaction Handler")]
     public InteractionHandler interactionHandler;
 
+    [Header("Interaction Timer")]
     public InteractionTimer timer;
 
     private Rigidbody _rb;
@@ -24,21 +25,21 @@ public class Dice : MonoBehaviour
             timer.StartTimer();
     }
 
+    //Executed when the cube is released
     public void OnDice()
     {
         _rollCounter++;
         
-        Debug.Log("Roll Counter: " + _rollCounter);
         _rb.AddTorque(Random.Range(0,500),Random.Range(0,500),Random.Range(0,500));
 
         if (_rollCounter > 4)
         {
-            Debug.Log("Roll Counter Done");
             if(_diceFinished == null)
                 _diceFinished = StartCoroutine(DiceIsFinished());
         }
     }
 
+    //Is executed when the user has rolled the dice at least 5 times
     private IEnumerator DiceIsFinished()
     {
         timer.StopTimer();

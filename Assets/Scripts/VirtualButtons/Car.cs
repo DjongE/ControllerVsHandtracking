@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using UnityEngine;
 
 public class Car : MonoBehaviour
@@ -13,30 +10,17 @@ public class Car : MonoBehaviour
     private float _time;
     private float _duration = 0.8f;
 
-    private void Start()
-    {
-        //StartCoroutine(Test());
-    }
-
-    private IEnumerator Test()
-    {
-        yield return new WaitForSeconds(5f);
-        PitchHigher();
-        yield return new WaitForSeconds(5f);
-        PitchLower();
-    }
-
     private void Update()
     {
         if (_pitchSound)
         {
-            //Higher
+            //Pitch the sound higher
             carSound.pitch = Mathf.Lerp(1f, 1.3f, _time / _duration);
             _time += Time.deltaTime;
         }
         else
         {
-            //Lower
+            //Pitch the sound lower
             carSound.pitch = Mathf.Lerp(1.3f, 1f, _time / _duration);
             _time += Time.deltaTime;
         }

@@ -137,27 +137,29 @@ public class HandPresence : MonoBehaviour
             return;
         }
 
-        if (!targetDevice.isValid && interactionHandler.controller)
+        if (interactionHandler.controller)
         {
-            TryInitialize();
-        }
-        
-        else
-        {
-            if (showController)
+            if (!targetDevice.isValid)
             {
-                if (spawnedHandModel)
-                    spawnedHandModel.SetActive(false);
-                if (spawnedController)
-                    spawnedController.SetActive(true);
+                TryInitialize();
             }
             else
             {
-                if (spawnedHandModel)
-                    spawnedHandModel.SetActive(true);
-                if (spawnedController)
-                    spawnedController.SetActive(false);
-                UpdateHandAnimation();
+                if (showController)
+                {
+                    if (spawnedHandModel)
+                        spawnedHandModel.SetActive(false);
+                    if (spawnedController)
+                        spawnedController.SetActive(true);
+                }
+                else
+                {
+                    if (spawnedHandModel)
+                        spawnedHandModel.SetActive(true);
+                    if (spawnedController)
+                        spawnedController.SetActive(false);
+                    UpdateHandAnimation();
+                }
             }
         }
     }

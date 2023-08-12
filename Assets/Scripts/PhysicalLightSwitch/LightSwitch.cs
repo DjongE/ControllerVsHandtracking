@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Microsoft.MixedReality.Toolkit.UX;
 using UnityEngine;
 
@@ -24,9 +22,6 @@ public class LightSwitch : MonoBehaviour
     [Header("Haptic Light Bulb")] 
     public GameObject hapticLight;
 
-    private float _startPushPlane = -0.01747753f;
-    private float _endPushPlane = -0.008356876f;
-
     private int _switchedCounter;
 
     private Coroutine _done;
@@ -35,11 +30,11 @@ public class LightSwitch : MonoBehaviour
     {
         nonHapticButtonLightOff.StartPushPlane = -0.008356876f;
         nonHapticButtonLightOff.GetComponent<BasicPressableButtonVisuals>().MovingVisuals.localPosition =
-            new Vector3(0, 0, -0.008356876f);
+            new Vector3(0, 0, -0.008356876f);//Set one of the switches into the "pressed" position
         
         hapticButtonLightOff.StartPushPlane = -0.008356876f;
         hapticButtonLightOff.GetComponent<BasicPressableButtonVisuals>().MovingVisuals.localPosition =
-            new Vector3(0, 0, -0.008356876f);
+            new Vector3(0, 0, -0.008356876f);//Set one of the switches into the "pressed" position
     }
 
     public void LightSwitchDone()
@@ -51,6 +46,7 @@ public class LightSwitch : MonoBehaviour
         }
     }
 
+    //Lightswitch interaction is done
     private IEnumerator DoneDelay()
     {
         timer.StopTimer();
@@ -61,8 +57,8 @@ public class LightSwitch : MonoBehaviour
 
     public void ClickLightOnNonHaptic()
     {
-        nonHapticButtonLightOff.StartPushPlane = -0.01747753f;
-        nonHapticButtonLightOn.StartPushPlane = -0.008356876f;
+        nonHapticButtonLightOff.StartPushPlane = -0.01747753f;//Released switch position z
+        nonHapticButtonLightOn.StartPushPlane = -0.008356876f;//Pressed switch position z
         
         nonHapticLight.SetActive(true);
 

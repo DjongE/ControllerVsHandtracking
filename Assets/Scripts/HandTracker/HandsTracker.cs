@@ -18,12 +18,12 @@ public class HandsTracker : MonoBehaviour
     public bool leftHandIsTracked;
     public bool rightHandIsTracked;
     
-
     private void Update()
     {
         HandsTracked();
     }
 
+    //Check when the virtual hands are visible and tracked (Just for Handtracking)
     private void HandsTracked()
     {
         _leftHandModel = leftHandController.model.GetChild(0).GetComponent<SkinnedMeshRenderer>();

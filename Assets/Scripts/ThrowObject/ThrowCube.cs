@@ -1,13 +1,12 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Microsoft.MixedReality.Toolkit.SpatialManipulation;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class ThrowCube : MonoBehaviour
 {
+    [Header("Ignore Collider")]
     public List<GameObject> ignoreObjects;
+    
+    [Header("Throw Object Interaction")]
     public ThrowObjectInteraction throwObjectInteraction;
 
     private void OnCollisionEnter(Collision other)
@@ -16,7 +15,6 @@ public class ThrowCube : MonoBehaviour
         {
             if (!ignoreObjects.Contains(other.gameObject))
             {
-                print("Thrown: " + other.gameObject.name);
                 throwObjectInteraction.ObjectThrown(gameObject);
             }
         }

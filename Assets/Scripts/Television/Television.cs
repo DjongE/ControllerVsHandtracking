@@ -15,19 +15,14 @@ public class Television : MonoBehaviour
     public string channel1Name;
     public GameObject channel1Template;
     public GameObject channel1GridObjectContainer;
-    //public ScrollingObjectCollection channel1Soc;
-    //private GridObjectCollection _channel1GridObjectCollection;
     private List<string> _channel1ColostomaActionDescription;
     private List<GameObject> _channel1Actions = new List<GameObject>();
     List<GameObject> actionsToRemove = new List<GameObject>();
 
     [Header("Channel 2")]
     public string channel2Name;
-    //public Procedure proc;
     public GameObject channel2Template;
     public GameObject channel2GridObjectContainer;
-   // public ScrollingObjectCollection channel2Soc;
-    //private GridObjectCollection _channel2GridObjectCollection;
 
     [Header("Channel 3")]
     public string channel3Name;
@@ -116,8 +111,6 @@ public class Television : MonoBehaviour
 
 
         StartCoroutine(UpdateGridLayout());
-        //channel1Soc.UpdateContent();
-        //_channel1GridObjectCollection.UpdateCollection();
 
     }
 
@@ -126,7 +119,6 @@ public class Television : MonoBehaviour
     {
         _channel1ColostomaActionDescription.RemoveAll(s => s.Contains("nächster Schritt"));
 
-        //foreach (TextMeshPro tmp in _channel1GridObjectCollection.GetComponentsInChildren<TextMeshPro>())
         foreach (GameObject action in _channel1Actions)
         {
             if (action.GetComponent<TextMeshPro>() && 
@@ -144,12 +136,8 @@ public class Television : MonoBehaviour
         }
 
         actionsToRemove.Clear();
-
         
-
         StartCoroutine(UpdateGridLayout());
-        //channel1Soc.UpdateContent();
-        //_channel1GridObjectCollection.UpdateCollection();
     }
 
     private void RemoveTextMeshPro()
@@ -161,22 +149,11 @@ public class Television : MonoBehaviour
     {
         
         yield return new WaitForEndOfFrame();
-        /*
-        if(_channel1GridObjectCollection != null)
-            _channel1GridObjectCollection.UpdateCollection();
-
-        yield return new WaitForEndOfFrame();
-        if (channel1Soc != null)
-        {
-            //channel1Soc.UpdateContent();
-            //channel1Soc.MoveByTiers(2, true);
-            //channel1Soc.MoveToIndex(_channel1Actions.Count, true);
-        }*/
     }
     
     #endregion
     
-    //Sender 2 (Korrekte Reihenfolge der Maßnahmen)
+    
     #region Channel 2
 
     public void AddChannel2ColostomaActionList()
@@ -202,7 +179,7 @@ public class Television : MonoBehaviour
     
     #endregion
     
-    //Sender 3 (Statistik)
+    
     #region Channel 3
 
     private void UpdateTimerStatistik()

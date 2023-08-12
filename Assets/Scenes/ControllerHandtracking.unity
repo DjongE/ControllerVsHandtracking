@@ -788,13 +788,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionHandler: {fileID: 1739932775894402238}
+  timer: {fileID: 1764151470}
   points: 0
   pointsText: {fileID: 445490763}
   hitTarget: {fileID: 1739932775894402232}
-  restartWithHandTrackingEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  timer: {fileID: 1764151470}
 --- !u!4 &72793948
 Transform:
   m_ObjectHideFlags: 0
@@ -7958,7 +7955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 1
   duration: 0.5
-  _baseInteractable: {fileID: 524577009}
+  baseInteractable: {fileID: 524577009}
 --- !u!1 &525314971
 GameObject:
   m_ObjectHideFlags: 0
@@ -9131,7 +9128,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultAmplitude: 1
   defaultDuration: 1
-  controllerPrefabs: []
   controllerCharacteristics: 320
   hapticSended: 0
 --- !u!114 &577472396 stripped
@@ -10333,7 +10329,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultAmplitude: 1
   defaultDuration: 1
-  controllerPrefabs: []
   controllerCharacteristics: 576
   hapticSended: 0
 --- !u!114 &700347344 stripped
@@ -12723,7 +12718,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultAmplitude: 0.2
   defaultDuration: 0.5
-  controllerPrefabs: []
   controllerCharacteristics: 576
   hapticSended: 0
 --- !u!4 &808438461
@@ -17745,7 +17739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 1
   duration: 0.5
-  _baseInteractable: {fileID: 1081301558}
+  baseInteractable: {fileID: 1081301558}
 --- !u!4 &1083636812 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2244185731585867246, guid: cd0f0697f0939504389ec612388f609a, type: 3}
@@ -45227,7 +45221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reverse: 1
-  controller: 1
+  controller: 0
   startControllerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -50809,7 +50803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fcd4be908e2064095c5aec0daf5b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hanoiHandler: {fileID: 2765526843290034088}
   placedRight: {fileID: 1739932775894402232}
   underHanoi: {fileID: 0}
   aboveHanoi: {fileID: 3071536116580854260}
@@ -50921,7 +50914,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fcd4be908e2064095c5aec0daf5b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hanoiHandler: {fileID: 2765526843290034088}
   placedRight: {fileID: 1739932775894402232}
   underHanoi: {fileID: 3071536117612236279}
   aboveHanoi: {fileID: 0}
@@ -51345,7 +51337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fcd4be908e2064095c5aec0daf5b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hanoiHandler: {fileID: 2765526843290034088}
   placedRight: {fileID: 1739932775894402232}
   underHanoi: {fileID: 3071536116580854260}
   aboveHanoi: {fileID: 3071536117717089453}
@@ -51679,10 +51670,9 @@ MonoBehaviour:
   - {fileID: 2765526843202439752}
   - {fileID: 2765526843417356264}
   - {fileID: 2765526842662995245}
-  _placedRightHanoiObjects: []
+  placedRightHanoiObjects: []
   interactionHandler: {fileID: 1739932775894402238}
   timer: {fileID: 1764151470}
-  doneSound: {fileID: 1739932775894402232}
 --- !u!4 &2765526843290034089
 Transform:
   m_ObjectHideFlags: 0
@@ -51731,7 +51721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fcd4be908e2064095c5aec0daf5b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hanoiHandler: {fileID: 2765526843290034088}
   placedRight: {fileID: 1739932775894402232}
   underHanoi: {fileID: 3071536117275449249}
   aboveHanoi: {fileID: 3071536117612236279}
@@ -56226,7 +56215,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1739932775894402235}
         m_TargetAssemblyTypeName: HandTrackingTutorialHandler, Assembly-CSharp
-        m_MethodName: NextStepChannel1
+        m_MethodName: NextStep
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -69435,7 +69424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6789177241190173653}
   m_Layer: 0
-  m_Name: Channel3
+  m_Name: Channel3 - ForBackup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71809,7 +71798,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 0.5
   duration: 0.1
-  _baseInteractable: {fileID: 7207244709400289413}
+  baseInteractable: {fileID: 7207244709400289413}
 --- !u!114 &7207244709400289425
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,12 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CarTarget : MonoBehaviour
 {
+    [Header("Target")]
     public AudioSource arrivedTarget;
+    
+    [Header("Virtual Buttons")]
     public VirtualButtons virtualButtons;
+    
+    [Header("Car object")]
     public GameObject car;
 
     private void OnTriggerEnter(Collider other)

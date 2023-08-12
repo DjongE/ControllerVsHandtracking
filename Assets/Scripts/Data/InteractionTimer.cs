@@ -1,6 +1,8 @@
-using System;
 using UnityEngine;
 
+/**
+ * A normal timer to be able to record the execution speeds of the interactions
+ */
 public class InteractionTimer : MonoBehaviour
 {
     private bool _timerStarted;
@@ -14,17 +16,17 @@ public class InteractionTimer : MonoBehaviour
         }
     }
 
+    //Start the timer
     public void StartTimer()
     {
         _time = 0;
         _timerStarted = true;
-        Debug.Log("Timer gestartet: " + _time);
     }
 
+    //Stop the timer
     public void StopTimer()
     {
         _timerStarted = false;
-        Debug.Log("Timer gestopt: " + _time);
     }
 
     public bool TimerStarted()
