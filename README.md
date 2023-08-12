@@ -1,5 +1,14 @@
 # Controller Vs. Handtracking
 
+## Informationen
+Ich empfehle die Oculus Quest oder Oculus Quest 2 für dieses Projekt zu verwenden, da dieses Projekt mit der Oculus Quest und Oculus Quest 2 entwickelt wurde.
+
+Sobald alle weiteren Schritte durchgeführt worde sind, kann die Anwendung gestartet werden.
+
+## Oculus Quest/Quest 2
+Das VR-Headset muss mit dem Computer verbunden sein.</br>
+Zudem muss in der Oculus Quest "Quest Link" gestartet werden, nachdem das Headset mit dem Computer verbunden wurde.
+
 ## Welche Unity Version wird benötigt?
 Es wird die Unity Version 2022.2.1f1 benötigt.
 Zudem muss bei der Installation folgende Platforms ausgewählt werden:
@@ -15,7 +24,7 @@ Zudem muss bei der Installation folgende Platforms ausgewählt werden:
 3. In Unity Hub das Projekt "ControllerVsHandtracking" starten
 
 ## Auswahl zwischen Controller und Handtracking und die Interaktions Reihenfolge
-Auf dem Bild [![name]([link to image on GH](https://github.com/DjongE/ControllerVsHandtracking/blob/3cc77bc7520320515b48483e6dacedb07a2d2b3d/InteractionHandler.PNG))] sind die Einstellungungen zu sehen, mit welchen die Reihenfolge der Interaktionen ausgewählt und zwischen Controller und Handtracking gewechselt werden kann.
+Auf dem Bild (siehe Abbildung [InteraktionHandler](https://github.com/DjongE/ControllerVsHandtracking/blob/3cc77bc7520320515b48483e6dacedb07a2d2b3d/InteractionHandler.PNG) oder weiter unten) sind die Einstellungungen zu sehen, mit welchen die Reihenfolge der Interaktionen ausgewählt und zwischen Controller und Handtracking gewechselt werden kann.
 
 Auswahl der Interaktionsform:
 - Wenn der Haken bei der Option "Controller" gesetzt wird, ist der Controller-Modi aktiv.</br>
